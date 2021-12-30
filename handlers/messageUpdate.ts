@@ -25,6 +25,19 @@ export async function handleMessageUpdateEvent(
             emitted = true;
         }
         /**
+         * @event messageUnpinned
+         * @description Emitted when a message has been unpinned.
+         * @param {DJS:Message} message The message that was unpinned.
+         * @example
+         * client.on("messageUnpinned", (message) => {
+         *   console.log("This message has been unpinned : "+message);
+         * });
+         */
+        if (oldMessage.pinned && !newMessage.pinned) {
+            client.emit('messageUnpinned', newMessage);
+            emitted = true;
+        }
+        /**
          * @event messageContentEdited
          * @description Emitted when a message content has been edited.
          * @param {DJS:Message} message The old message.
